@@ -1,14 +1,14 @@
 import React from 'react';
+import uuid from 'uuid';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
 import TodoDone from './TodoDone';
-
 
 class App extends React.Component {
     state = {
         todos: [
             {
-                id: 1,
+                id: uuid(),
                 content: "shopping",
                 priority: true,
                 addDate: new Date().toDateString(),
@@ -16,7 +16,7 @@ class App extends React.Component {
                 complete: false,
             },
             {
-                id: 2,
+                id: uuid(),
                 content: "clean flat",
                 priority: false,
                 addDate: new Date().toDateString(),
@@ -24,7 +24,7 @@ class App extends React.Component {
                 complete: false,
             },
             {
-                id: 3,
+                id: uuid(),
                 content: "go to the gym",
                 priority: false,
                 addDate: new Date().toDateString(),
@@ -36,7 +36,7 @@ class App extends React.Component {
     }
     addNewTodo = (todo) => {
         const newTodo = {
-            id: 4,
+            id: uuid(),
             completeDate: '',
             complete: false,
             ...todo
