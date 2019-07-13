@@ -11,7 +11,7 @@ class App extends React.Component {
                 id: uuid(),
                 content: "shopping",
                 priority: true,
-                addDate: new Date().toDateString(),
+                addDate: new Date().toLocaleDateString(),
                 completeDate: "",
                 complete: false,
             },
@@ -19,7 +19,7 @@ class App extends React.Component {
                 id: uuid(),
                 content: "clean flat",
                 priority: false,
-                addDate: new Date().toDateString(),
+                addDate: new Date().toLocaleDateString(),
                 completeDate: "",
                 complete: false,
             },
@@ -27,9 +27,9 @@ class App extends React.Component {
                 id: uuid(),
                 content: "go to the gym",
                 priority: false,
-                addDate: new Date().toDateString(),
-                completeDate: new Date().toDateString(),
-                complete: true,
+                addDate: new Date().toLocaleDateString(),
+                completeDate: "",
+                complete: false,
             },
         ]
 
@@ -49,14 +49,41 @@ class App extends React.Component {
         });
     }
 
+    changeStatus = (id) => {
+        const todos = this.state.todos.map(todo => {
+            const date = `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`
+            if (todo.id === id) {
+                todo.complete = true;
+                todo.completeDate = date;
+                return todo;
+            } else {
+                return todo;
+            }
+        });
+
+        this.setState({
+            todos,
+        });
+    }
+
+    removeTodo = (id) => {
+        const todos = this.state.todos.filter(todo => {
+            return todo.id !== id
+        });
+        this.setState({
+            todos,
+        })
+
+    }
 
     render() {
         const completeTodo = this.state.todos.filter(todo => todo.complete);
+        const uncompleteTodo = this.state.todos.filter(todo => !todo.complete);
         return (
             <div>
                 <AddTodo addTodo={this.addNewTodo} />
-                <TodoList todos={this.state.todos} />
-                <TodoDone todos={completeTodo} />
+                <TodoList todos={uncompleteTodo} changeStatus={this.changeStatus} removeTodo={this.removeTodo} />
+                <TodoDone todos={completeTodo} removeTodo={this.removeTodo} />
             </div>
         )
     }

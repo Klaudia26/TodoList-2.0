@@ -24,9 +24,13 @@ class AddTodo extends Component {
     }
     handleClick = () => {
         this.props.addTodo(this.state);
+        this.setState({
+            content: "",
+            priority: false,
+            addDate: "",
+        })
     }
     render() {
-        // console.log(this.props)
         return (
             <div>
                 <div>

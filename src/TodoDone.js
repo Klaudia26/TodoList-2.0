@@ -10,9 +10,9 @@ const TodoDone = (props) => {
                     return (
                         <li key={todo.id}>
                             {todo.content}
-                            {todo.addDate}
-                            {todo.completeDate}
-                            <button>X</button>
+                            <button onClick={(e) => props.removeTodo(todo.id)}>X</button>
+                            <p>Date of adding: {todo.addDate}</p>
+                            <p>Date of completing: {todo.completeDate}</p>
                         </li>
                     )
                 })}
